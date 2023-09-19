@@ -1218,6 +1218,8 @@ static struct riscv_supported_ext riscv_supported_std_z_ext[] =
   {"zvl32768b",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"zvl65536b",		ISA_SPEC_CLASS_DRAFT,		1, 0,  0 },
   {"ztso",		ISA_SPEC_CLASS_DRAFT,		0, 1,  0 },
+  {"zimop",			ISA_SPEC_CLASS_DRAFT, 0, 1, 0},
+  {"zcmop",			ISA_SPEC_CLASS_DRAFT, 0, 1, 0},
   {NULL, 0, 0, 0, 0}
 };
 
@@ -2383,6 +2385,10 @@ riscv_multi_subset_supports (riscv_parse_subset_t *rps,
       return riscv_subset_supports (rps, "xtheadmempair");
     case INSN_CLASS_XTHEADSYNC:
       return riscv_subset_supports (rps, "xtheadsync");
+    case INSN_CLASS_ZIMOP:
+      return riscv_subset_supports (rps, "zimop");
+    case INSN_CLASS_ZCMOP:
+      return riscv_subset_supports (rps, "zcmop");
     default:
       rps->error_handler
         (_("internal: unreachable INSN_CLASS_*"));
@@ -2541,6 +2547,10 @@ riscv_multi_subset_supports_ext (riscv_parse_subset_t *rps,
       return "xtheadmempair";
     case INSN_CLASS_XTHEADSYNC:
       return "xtheadsync";
+    case INSN_CLASS_ZIMOP:
+      return _("zimop");
+    case INSN_CLASS_ZCMOP:
+      return _("zcmop");
     default:
       rps->error_handler
         (_("internal: unreachable INSN_CLASS_*"));
